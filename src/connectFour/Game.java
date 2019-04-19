@@ -39,7 +39,7 @@ public class Game {
 	
 	public int getMoves() { return moves; }
 	
-	public void decreaseMoves() { --moves; }
+	private void decreaseMoves() { --moves; }
 	
 	public boolean checkMoves() {
         if (moves == 0) {
