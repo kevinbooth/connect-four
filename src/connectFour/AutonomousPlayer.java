@@ -7,7 +7,7 @@ public class AutonomousPlayer implements Player {
 	private String tileType;
 	
 	public AutonomousPlayer(String tileType) {
-		
+		this.tileType = tileType;
 	}
 	
 	public String getName() { return name; }
