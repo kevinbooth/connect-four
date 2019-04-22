@@ -8,6 +8,7 @@ public class Main {
 		game = new Game();
 		
 		while(playing) {
+			// start player's turn
 			playing = game.toggleTurn();
 		}
 	}
