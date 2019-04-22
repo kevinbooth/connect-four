@@ -1,5 +1,6 @@
 package connectFour;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
@@ -19,14 +20,14 @@ public class Game {
 	private void startGame() {
 		printHeader();
 		createPlayerData();
-		
+		board.generateGameBoard();
 	}
 	
 	private void createPlayerData() {
 		System.out.print("What is your name?: ");
 		String name = scanner.nextLine();
-		playerOne = new OrganicPlayer(name, "X");
-		playerTwo = new AutonomousPlayer("O");
+		playerOne = new OrganicPlayer(name, 1, "X");
+		playerTwo = new AutonomousPlayer(2, "O");
 	}
 	
 	private void changePlayer() {
@@ -49,18 +50,44 @@ public class Game {
 	}
 	
 	private void printHeader() {
-	    System.out.println("            CONNECT FOUR");
-	    System.out.println("-------------------------------------");
+	    System.out.println("      CONNECT FOUR");
+	    System.out.println("------------------------");
 	    System.out.println("Welcome to Connect Four!");
 	    System.out.println();
 	}
 	
 	public boolean toggleTurn() {
+		boolean movesLeft;
 		changePlayer();
+		decreaseMoves();
 		
-		System.out.printf("Select a column number from 1 to 7, %s: ", currentPlayer.getName());
+		if (currentPlayer instanceof OrganicPlayer) {
+			boolean result = false;
+			
+			while (!result) {
+				System.out.printf("Select a column, %s: ", currentPlayer.getName());
+				try {
+					int column = Integer.parseInt(scanner.nextLine());
+					result = board.makeTurn(currentPlayer, column);
+				} catch (NumberFormatException e) {
+					System.out.println("Column choice must be a number!");
+				}
+			}
+		} else {
+			List<Integer> emptyColumns = board.getEmptyColumns();
+			
+			int column = ((AutonomousPlayer) currentPlayer).chooseRandomColumn(emptyColumns);
+			board.makeTurn(currentPlayer, column);
+			board.generateGameBoard();
+		}
 		
-		// returns true to keep playing if no one has won yet
-		return true;
+		
+		movesLeft = checkMoves();
+		if (movesLeft) {
+			return true; // still have moves, keep playing
+		} else {
+			System.out.println("There are no move moves left on the board");
+			return false; // no more moves left
+		}
 	}
 }
