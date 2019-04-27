@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Game {
 	
 	private Scanner scanner = new Scanner(System.in);
-	private int moves = 7 * 6;
 	private Board board;
 	private Player playerOne;
 	private Player playerTwo;
@@ -18,12 +17,18 @@ public class Game {
 	}
 	
 	private void startGame() {
+		/*
+		 * Used as the method to setup all aspects of the game
+		 */
 		printHeader();
 		createPlayerData();
 		board.generateGameBoard();
 	}
 	
 	private void createPlayerData() {
+		/*
+		 * Asks the player specific information about themselves
+		 */
 		System.out.print("What is your name?: ");
 		String name = scanner.nextLine();
 		playerOne = new OrganicPlayer(name, 1, "X");
@@ -31,6 +36,9 @@ public class Game {
 	}
 	
 	private void changePlayer() {
+		/*
+		 * Changes the current player to the next player
+		 */
 		if (currentPlayer == playerOne) {
 			currentPlayer = playerTwo;
 		} else {
@@ -38,18 +46,10 @@ public class Game {
 		}
 	}
 	
-	public int getMoves() { return moves; }
-	
-	private void decreaseMoves() { --moves; }
-	
-	public boolean checkMoves() {
-        if (moves == 0) {
-           return false;
-        }
-        return true;
-	}
-	
 	private void printHeader() {
+		/*
+		 * Prints the header prior to starting the game
+		 */
 	    System.out.println("      CONNECT FOUR");
 	    System.out.println("------------------------");
 	    System.out.println("Welcome to Connect Four!");
@@ -57,8 +57,11 @@ public class Game {
 	}
 	
 	public boolean toggleTurn() {
+		/*
+		 * Handles the state of who is playing and is used to handle if anyone 
+		 * has won the game
+		 */
 		changePlayer();
-		decreaseMoves();
 		
 		if (currentPlayer instanceof OrganicPlayer) {
 			boolean result = false;
