@@ -20,11 +20,7 @@ public class AutonomousPlayer implements Player {
 	public String getTileType() { return tileType; }
 	
 	public int chooseRandomColumn(List<Integer> columns) {
-		for (int column : columns) {
-			System.out.print(column + " ");
-		}
 		Collections.shuffle(columns);
-		System.out.println("Auto pick: " + columns.get(0));
 		return columns.get(0);
 	}
 }
