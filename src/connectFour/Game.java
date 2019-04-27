@@ -52,7 +52,6 @@ public class Game {
 	    System.out.println("      CONNECT FOUR");
 	    System.out.println("------------------------");
 	    System.out.println("Welcome to Connect Four!");
-	    System.out.println();
 	}
 	
 	public boolean toggleTurn() {
@@ -90,7 +89,7 @@ public class Game {
 			return false; // no more moves left
 		} else if (status == 1) {
 			board.generateGameBoard();
-			System.out.println("Congrats " + playerOne.getName() + ", \nyou have won the game!");
+			System.out.println("Congrats " + playerOne.getName() + ", you have won the game!");
 			return false;
 		} else if (status == 2) {
 			System.out.println("Maybe next time, " + playerOne.getName() + ". "

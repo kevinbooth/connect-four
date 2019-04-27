@@ -28,11 +28,14 @@ public class Board {
 		 * Used to generate the board UI in the console Can be called after each
 		 * successful move
 		 */
-		System.out.println("\n=============");
+		System.out.println("\n      =============");
 		// Display the number for each column
-		System.out.println("1 2 3 4 5 6 7");
+		System.out.println("      1 2 3 4 5 6 7");
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLUMNS; j++) {
+				if (j == 0) {
+					System.out.print("      ");
+				}
 				if (gameBoard[i][j] == X) {
 					System.out.print("X ");
 				} else if (gameBoard[i][j] == O) {
@@ -43,7 +46,7 @@ public class Board {
 			}
 			System.out.println();
 		}
-		System.out.println("=============\n");
+		System.out.println("      =============\n");
 	}
 
 	public boolean makeTurn(Player player, int column) {
