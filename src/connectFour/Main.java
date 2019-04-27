@@ -6,6 +6,7 @@ public class Main {
 		Game game;
 		boolean playing = true;
 		game = new Game();
+		game.startGame();
 		
 		while(playing) {
 			// start player's turn

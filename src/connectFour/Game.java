@@ -13,10 +13,9 @@ public class Game {
 	
 	public Game() {
 		board = new Board();
-		startGame();
 	}
 	
-	private void startGame() {
+	public void startGame() {
 		/*
 		 * Used as the method to setup all aspects of the game
 		 */
@@ -83,17 +82,17 @@ public class Game {
 			board.generateGameBoard();
 		}
 		
+		// check board capacity and for winners
+		int status = board.validateGameBoard();
 		
-		int winStatus = board.validateGameBoard();
-		
-		if (winStatus == 0) {
-			System.out.println("There are no move moves left on the board");
+		if (status == 0) {
+			System.out.println("There are no more moves \nleft on the board");
 			return false; // no more moves left
-		} else if (winStatus == 1) {
+		} else if (status == 1) {
 			board.generateGameBoard();
-			System.out.println("Congrats " + playerOne.getName() + ", you have won the game!");
+			System.out.println("Congrats " + playerOne.getName() + ", \nyou have won the game!");
 			return false;
-		} else if (winStatus == 2) {
+		} else if (status == 2) {
 			System.out.println("Maybe next time, " + playerOne.getName() + ". "
 			+ playerTwo.getName() + " has won the game!");
 			return false;
