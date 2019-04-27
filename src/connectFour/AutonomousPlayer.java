@@ -20,6 +20,10 @@ public class AutonomousPlayer implements Player {
 	public String getTileType() { return tileType; }
 	
 	public int chooseRandomColumn(List<Integer> columns) {
+		/*
+		 * Chooses a random column on the board based on
+		 * what columns have open spaces
+		 */
 		Collections.shuffle(columns);
 		return columns.get(0);
 	}
