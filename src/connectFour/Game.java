@@ -57,7 +57,6 @@ public class Game {
 	}
 	
 	public boolean toggleTurn() {
-		boolean movesLeft;
 		changePlayer();
 		decreaseMoves();
 		
@@ -82,12 +81,21 @@ public class Game {
 		}
 		
 		
-		movesLeft = checkMoves();
-		if (movesLeft) {
-			return true; // still have moves, keep playing
-		} else {
+		int winStatus = board.validateGameBoard();
+		
+		if (winStatus == 0) {
 			System.out.println("There are no move moves left on the board");
 			return false; // no more moves left
+		} else if (winStatus == 1) {
+			board.generateGameBoard();
+			System.out.println("Congrats " + playerOne.getName() + ", you have won the game!");
+			return false;
+		} else if (winStatus == 2) {
+			System.out.println("Maybe next time, " + playerOne.getName() + ". "
+			+ playerTwo.getName() + " has won the game!");
+			return false;
 		}
+		
+		return true;
 	}
 }
