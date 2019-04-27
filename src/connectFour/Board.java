@@ -24,6 +24,10 @@ public class Board {
 	}
 
 	public void generateGameBoard() {
+		/*
+		 * Used to generate the board UI in the console Can be called after each
+		 * successful move
+		 */
 		System.out.println("\n=============");
 		// Display the number for each column
 		System.out.println("1 2 3 4 5 6 7");
@@ -80,7 +84,10 @@ public class Board {
 	}
 
 	private boolean isBoardFull() {
-		// If any value in our board is -1, the board is not full
+		/*
+		 * Checks to see if the board can hold any more moves If any value in our board
+		 * is -1, the board is not full
+		 */
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLUMNS; j++) {
 				if (gameBoard[i][j] == -1) {
@@ -105,6 +112,9 @@ public class Board {
 	}
 
 	public List<Integer> getEmptyColumns() {
+		/*
+		 * Returns a list of columns that are not full
+		 */
 		List<Integer> emptyColumns = new ArrayList<Integer>();
 
 		for (int i = 0; i < COLUMNS; i++) {
@@ -117,17 +127,15 @@ public class Board {
 	}
 
 	public int validateGameBoard() {
-		// 1.) Check each row for four sequential pieces of the same color
-		// 2.) Check each column for four sequential pieces of the same color
-		// 3.) check each diagonal(with more than four spaces along it) for four
-		// sequential pieces of the same color
-		// Return -1 if no current winner
-		// Return 0 if the board is full, indicating a tie
-		// Return 1 if player one wins
-		// Return 2 if player 2 wins
+		/*
+		 * 1.) Check each row for four sequential pieces of the same color 2.) Check
+		 * each column for four sequential pieces of the same color 3.) check each
+		 * diagonal(with more than four spaces along it) for four sequential pieces of
+		 * the same color Return -1 if no current winner Return 0 if the board is full,
+		 * indicating a tie Return 1 if player one wins Return 2 if player 2 wins
+		 */
 
 		if (isBoardFull()) {
-			System.out.println("The board is full!");
 			return 0;
 		}
 		int checkRows = validateRows();
@@ -143,14 +151,13 @@ public class Board {
 	}
 
 	private int validateRows() {
-		// System.out.println("Now validating rows");
-		// To validate the rows we do the following:
-		// 1.) For each row, we select a slice of 4 columns.
-		// 2.) We place each of these column values in a hash set.
-		// 3.) Since hash sets do not allow duplicates, we will easily know if our group
-		// of 4 were the same number(color)
-		// 4.) We repeat this process for each group of four columns in the row, for
-		// every row of the board.
+		/*
+		 * To validate the rows we do the following: 1.) For each row, we select a slice
+		 * of 4 columns. 2.) We place each of these column values in a hash set. 3.)
+		 * Since hash sets do not allow duplicates, we will easily know if our group of
+		 * 4 were the same number(color) 4.) We repeat this process for each group of
+		 * four columns in the row, for every row of the board.
+		 */
 		for (int i = 0; i < ROWS; i++) {
 			for (int j = 0; j < COLUMNS - 3; j++) {
 				Set<Integer> pieceSet = new HashSet<Integer>();
@@ -175,12 +182,12 @@ public class Board {
 	}
 
 	private int validateColumns() {
-		// System.out.println("Now validating columns");
-		// To validate the columns, we use a similar hash set validation process to the
-		// row validation.
-		// The key difference is, for every column, we select a slice of 4 rows.
-		// each time we grab one of these slices, we check the hash set exactly the way
-		// we did the the row validator
+		/*
+		 * To validate the columns, we use a similar hash set validation process to the
+		 * row validation. The key difference is, for every column, we select a slice of
+		 * 4 rows. each time we grab one of these slices, we check the hash set exactly
+		 * the way we did the the row validator
+		 */
 		for (int j = 0; j < COLUMNS; j++) {
 			for (int i = ROWS - 1; i >= 3; i--) {
 
