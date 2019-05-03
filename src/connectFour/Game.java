@@ -28,8 +28,18 @@ public class Game {
 		/*
 		 * Asks the player specific information about themselves
 		 */
-		System.out.print("What is your name?: ");
-		String name = scanner.nextLine();
+		String name;
+		
+		while(true) {
+			System.out.print("What is your name?: ");
+			name = scanner.nextLine();
+			
+			if(name.isEmpty()) {
+				System.out.println("You didn't enter your name!");
+			} else {
+				break;
+			}
+		}
 		playerOne = new OrganicPlayer(name, 1, "X");
 		playerTwo = new AutonomousPlayer(2, "O");
 	}
