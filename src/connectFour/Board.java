@@ -143,10 +143,10 @@ public class Board {
 		}
 		int checkRows = validateRows();
 		int checkColumns = validateColumns();
-
-		if (checkRows == 1 || checkColumns == 1) {
+		int checkDiagonals = validateDiagonals();
+		if (checkRows == 1 || checkColumns == 1 || checkDiagonals == 1) {
 			return 1;
-		} else if (checkRows == 2 || checkColumns == 2) {
+		} else if (checkRows == 2 || checkColumns == 2 || checkDiagonals == 2) {
 			return 2;
 		} else {
 			return -1;
@@ -213,4 +213,130 @@ public class Board {
 		}
 		return -1;
 	}
+
+	private int validateDiagonals() {
+		// Start by moving across the first row(left to right), and check all diagonals
+		// that can fit more than 4 pieces.
+		// System.out.println("Now validating diagonals left to right");
+		// Validating the diagonals is more involved than the last two validations:
+
+		/*
+		 * First, move across the first row, validating all left diagonals (diagonals
+		 * which connect the top row to the left most column)
+		 */
+		// Note that not every diagonal will contain 4 positions, so we can skip such
+		// diagonals
+		for (int i = 3; i < COLUMNS; i++) {
+			int j = 0; // Check each left diagonal in the first row
+			int k = i;
+			while (k - 3 >= 0 && j + 3 < ROWS) {
+				Set<Integer> pieces = new HashSet<>();
+				pieces.add(gameBoard[j][k]);
+				pieces.add(gameBoard[j + 1][k - 1]);
+				pieces.add(gameBoard[j + 2][k - 2]);
+				pieces.add(gameBoard[j + 3][k - 3]);
+				if (pieces.size() == 1) {
+					if (pieces.contains(X)) {
+						return X;
+					} else if (pieces.contains(O)) {
+						return O;
+					}
+				}
+				j++;
+				k--;
+
+			}
+
+		}
+
+		/*
+		 * Then we move down the right most column and validate each diagonal which
+		 * connects this column to the bottom row
+		 */
+		// Note that our previous top row diagonal validator will have checked the fist
+		// column's diagonal already
+		for (int i = 1; i < 3; i++) {
+			int j = i; // set the row number to change with i
+			int k = COLUMNS - 1;// only traverse the last column
+
+			while (j + 3 < ROWS && k - 3 >= 0) {
+				Set<Integer> pieces = new HashSet<>();
+				pieces.add(gameBoard[j][k]);
+				pieces.add(gameBoard[j + 1][k - 1]);
+				pieces.add(gameBoard[j + 2][k - 2]);
+				pieces.add(gameBoard[j + 3][k - 3]);
+
+				if (pieces.size() == 1) {
+					if (pieces.contains(X)) {
+						return X;
+					} else if (pieces.contains(O)) {
+						return O;
+					}
+				}
+				j++;
+				k--;
+			}
+		}
+
+		// System.out.println("Now validating diagonals right to left");
+
+		/*
+		 * Now we repeat the above process, but begin by validating each right
+		 * diagonal(diagonals which connect the top row to the rightmost column
+		 */
+		// Note we can again ignore diagonals that are shorter than 4 board positions
+		for (int i = COLUMNS - 4; i >= 0; i--) {
+			// Moving across the top row from right to left, validate each diagonal
+			int j = 0; // Move across the first row
+			int k = i;// set the column number to change with i
+
+			while (j + 3 < ROWS && k + 3 < COLUMNS) {
+				Set<Integer> pieces = new HashSet<>();
+				pieces.add(gameBoard[j][k]);
+				pieces.add(gameBoard[j + 1][k + 1]);
+				pieces.add(gameBoard[j + 2][k + 2]);
+				pieces.add(gameBoard[j + 3][k + 3]);
+
+				if (pieces.size() == 1) {
+					if (pieces.contains(X)) {
+						return X;
+					} else if (pieces.contains(O)) {
+						return O;
+					}
+				}
+				j++;
+				k++;
+			}
+		}
+
+		/*
+		 * Lastly, move down the leftmost column and check each diagonal which connects
+		 * the left most column to the bottom row
+		 */
+		for (int i = 1; i < 3; i++) {
+			// validate each diagonal here
+			int j = i;// set the row number to change with i;
+			int k = 0;// before entering the while loop, begin at the first column(column 0);
+			while (j + 3 < ROWS && k + 3 < COLUMNS) {
+				Set<Integer> pieces = new HashSet<>();
+				pieces.add(gameBoard[j][k]);
+				pieces.add(gameBoard[j + 1][k + 1]);
+				pieces.add(gameBoard[j + 2][k + 2]);
+				pieces.add(gameBoard[j + 3][k + 3]);
+
+				if (pieces.size() == 1) {
+					if (pieces.contains(X)) {
+						return X;
+					} else if (pieces.contains(O)) {
+						return O;
+					}
+				}
+				j++;
+				k++;
+			}
+
+		}
+		return -1;
+	}
+
 }
