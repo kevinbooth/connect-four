@@ -129,6 +129,47 @@ public class Board {
 		return emptyColumns;
 	}
 
+	public int validateAlmostWinner() {
+		for (int i = 0; i < ROWS; i++) {
+			for (int j = 0; j < COLUMNS - 3; j++) {
+				Set<Integer> pieceSet = new HashSet<Integer>();
+				pieceSet.add(gameBoard[i][j]);
+				pieceSet.add(gameBoard[i][j + 1]);
+				pieceSet.add(gameBoard[i][j + 2]);
+				if (pieceSet.size() == 1) {
+					if (!pieceSet.contains(-1) && gameBoard[i][j + 3] == -1) {
+						// System.out.println("After: " + (j + 4));
+						return j + 4; // Base 1 return value
+					} else if (!pieceSet.contains(-1) 
+								&& gameBoard[i - 1][j] == -1 
+								&& gameBoard[i - 2][j] != -1) {
+						// System.out.println("Before: " + (j));
+						if (j != 0) {
+							return j; // Base 1 return value
+						}
+					}
+				}
+			}
+		}
+
+		for (int j = 0; j < COLUMNS; j++) {
+			for (int i = ROWS - 1; i >= 3; i--) {
+
+				Set<Integer> pieceSet = new HashSet<Integer>();
+				pieceSet.add(gameBoard[i][j]);
+				pieceSet.add(gameBoard[i - 1][j]);
+				pieceSet.add(gameBoard[i - 2][j]);
+				if (pieceSet.size() == 1) {
+					if (!pieceSet.contains(-1) && gameBoard[i - 3][j] == -1) {
+						// System.out.println("Vertical: " + (j + 1));
+						return j + 1;
+					}
+				}
+			}
+		}
+		return -1;
+	}
+	
 	public int validateGameBoard() {
 		/*
 		 * 1.) Check each row for four sequential pieces of the same color 2.) Check
