@@ -1,4 +1,6 @@
-                                                   Tic-Tac-Toe
+                                                   Connect Four
+                                                   
+Connect Four also known as Captain's Mistress, Four Up, Plot Four is a two-player connection game in which the players first choose a color and then take turns dropping one colored disc from the top into a seven-column, six-row vertically suspended grid. The pieces fall straight down, occupying the lowest available space within the column. The objective of the game is to be the first to form a horizontal, vertical, or diagonal line of four of one's own discs. Connect Four is a solved game. The first player can always win by playing the right moves.
  
  System and application requirements:
  1) Git bash
@@ -12,13 +14,9 @@
  Features of game
  1) User can chose his name.
  2) User can set the difficulty level from 1 to 3.
- 3) USe can play a rematch after p[laying the game.
+ 3) USe can play a rematch after playing the game.
  
- Rules of the game:
- 1) The game is played on a grid that's 3 squares by 3 squares.
- 2) You are X, the computer in this case is O. Players take turns putting their marks in empty squares.
- 3) The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.
- 4) When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.
+
  
  
  
