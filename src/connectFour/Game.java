@@ -29,6 +29,7 @@ public class Game {
 		 * Asks the player specific information about themselves
 		 */
 		String name;
+		int difficulty;
 		
 		while(true) {
 			System.out.print("What is your name?: ");
@@ -40,8 +41,26 @@ public class Game {
 				break;
 			}
 		}
+		
+		while(true) {
+			System.out.print("Choose a difficulty from 1 (easiest) to 3 (hardest): ");
+			
+			try {
+				difficulty = Integer.parseInt(scanner.nextLine());
+				System.out.println(difficulty);
+				
+				if (difficulty != 1 && difficulty != 2 && difficulty != 3) {
+					System.out.println("Please choose a number with the range!");
+				} else {
+					break;
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Please input a number!");
+			}
+		}
+		
 		playerOne = new OrganicPlayer(name, 1, "X");
-		playerTwo = new AutonomousPlayer(2, "O");
+		playerTwo = new AutonomousPlayer(2, "O", difficulty);
 	}
 	
 	private void changePlayer() {
@@ -85,8 +104,9 @@ public class Game {
 			}
 		} else {
 			List<Integer> emptyColumns = board.getEmptyColumns();
+			int bestMove = board.validateAlmostWinner();
 			
-			int column = ((AutonomousPlayer) currentPlayer).chooseRandomColumn(emptyColumns);
+			int column = ((AutonomousPlayer) currentPlayer).chooseRandomColumn(emptyColumns, bestMove);
 			board.makeTurn(currentPlayer, column);
 			board.generateGameBoard();
 		}
