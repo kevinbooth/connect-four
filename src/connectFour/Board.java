@@ -137,9 +137,9 @@ public class Board {
 				pieceSet.add(gameBoard[i][j + 1]);
 				pieceSet.add(gameBoard[i][j + 2]);
 				if (pieceSet.size() == 1) {
-					if (!pieceSet.contains(-1) && gameBoard[i][j + 3] == -1 && gameBoard[i - 2][j] != -1) {
+					if (!pieceSet.contains(-1) && gameBoard[i][j + 3] == -1) {
 						return j + 4; // Base 1 return value
-					} else if (!pieceSet.contains(-1) && gameBoard[i - 1][j] == -1 && gameBoard[i - 2][j] != -1) {
+					} else if (!pieceSet.contains(-1) && gameBoard[i - 1][j] == -1) {
 						if (j != 0) {
 							return j; // Base 1 return value
 						}
