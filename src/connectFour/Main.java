@@ -7,18 +7,18 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		boolean rematch = true;
-		
-		while(rematch) {
+
+		while (rematch) {
 			Game game;
 			boolean playing = true;
 			game = new Game();
 			game.startGame();
-			
-			while(playing) {
+
+			while (playing) {
 				playing = game.toggleTurn();
 			}
-			
-			while(true) {
+
+			while (true) {
 				System.out.print("Would you like a rematch? [y/N]: ");
 				String input = scanner.nextLine();
 				if (input.toLowerCase().equals("y")) {
